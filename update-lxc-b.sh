@@ -21,17 +21,13 @@ header_info
 containers=$(pct list | awk 'NR>1 { print $1, $(NF)}')
 
 function update_container() {
-  container=$1
-  cname=$2
-  clear
-  header_info
   echo -e "$1 $2 $3 \n"
 }
+
+echo -e "$containers \n"
 
 for container in $containers
 do
   update_container $container
 done; wait
 
-
-echo -e "${GN} Finished, all containers updated. ${CL} \n"
