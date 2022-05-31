@@ -21,10 +21,8 @@ header_info
 containers=$(pct list | awk 'NR>1 { print $1, $(NF)}')
 
 function update_container() {
-  echo -e "$1 $2 $3 \n"
+  echo -e "The ID is $1 and the name is $2 \n"
 }
-
-echo -e "$containers \n"
 
 for container in $containers
 do
