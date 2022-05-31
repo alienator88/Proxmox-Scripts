@@ -22,27 +22,39 @@ containers=$(pct list | tail -n +2 | cut -f1 -d' ')
 
 function update_container() {
   container=$1
+  name=$2
   clear
   header_info
-  echo -e "${BL}[Info]${GN} Updating${BL} $container ${CL} \n"
+  echo -e "${BL}[Info]${GN} Updating${BL} $name ($container) ${CL} \n"
   pct exec $container -- bash -c "apt update && apt upgrade -y && apt autoremove -y"
 }
 
 for container in $containers
 do
+
   status=`pct status $container`
+  name=`pct config $container | grep ^hostname | sed 's/.* //'`
+
   if [ "$status" == "status: stopped" ]; then
-    echo -e "${BL}[Info]${GN} Starting${BL} $container ${CL} \n"
+    clear
+    header_info
+    echo -e "${BL}[Info]${GN} Starting${BL} $name ($container) ${CL} \n"
     pct start $container
-    echo -e "${BL}[Info]${GN} Waiting for${BL} $container${CL}${GN} to start ${CL} \n"
+    clear
+    header_info
+    echo -e "${BL}[Info]${GN} Waiting for${BL} $name ($container) ${CL}${GN}to start ${CL} \n"
     sleep 5
-    update_container $container
-    echo -e "${BL}[Info]${GN} Shutting down${BL} $container ${CL} \n"
+    update_container $container $name
+    clear
+    header_info
+    echo -e "${BL}[Info]${GN} Shutting down${BL} $name ($container) ${CL} \n"
     pct shutdown $container &
   elif [ "$status" == "status: running" ]; then
-    update_container $container
+    update_container $container $name
   fi
 
 done; wait
 
+clear
+header_info
 echo -e "${GN} Finished, all containers updated. ${CL} \n"
