@@ -25,7 +25,7 @@ function update_container() {
   cname=$2
   clear
   header_info
-  echo -e "${BL}[Info]${GN} Updating${BL} $cname ($container) ${CL} \n"
+  echo -e "$1 $2 $3 \n"
 }
 
 for container in $containers
