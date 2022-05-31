@@ -6,14 +6,14 @@ CL=`echo "\033[m"`
 
 function header_info {
 echo -e "${BL}
-                _                   _    _           _       _         _     __   _______     
-     /\        | |                 | |  | |         | |     | |       | |    \ \ / / ____|    
-    /  \  _   _| |_ ___    ______  | |  | |_ __   __| | __ _| |_ ___  | |     \ V / |     ___ 
-   / /\ \| | | | __/ _ \  |______| | |  | | '_ \ / _` |/ _` | __/ _ \ | |      > <| |    / __|
-  / ____ \ |_| | || (_) |          | |__| | |_) | (_| | (_| | ||  __/ | |____ / . \ |____\__ \
- /_/    \_\__,_|\__\___/            \____/| .__/ \__,_|\__,_|\__\___| |______/_/ \_\_____|___/
-                                          | |                                                 
-                                          |_|                                                                                 
+                _                   _    _           _       _         _     __   _______ 
+     /\        | |                 | |  | |         | |     | |       | |    \ \ / / ____|
+    /  \  _   _| |_ ___    ______  | |  | |_ __   __| | __ _| |_ ___  | |     \ V / |     
+   / /\ \| | | | __/ _ \  |______| | |  | | '_ \ / _` |/ _` | __/ _ \ | |      > <| |     
+  / ____ \ |_| | || (_) |          | |__| | |_) | (_| | (_| | ||  __/ | |____ / . \ |____ 
+ /_/    \_\__,_|\__\___/            \____/| .__/ \__,_|\__,_|\__\___| |______/_/ \_\_____|
+                                          | |                                             
+                                          |_|                                                                                                       
 ${CL}"
 }
 header_info
@@ -34,7 +34,7 @@ do
   if [ "$status" == "status: stopped" ]; then
     echo -e "${BL}[Info]${GN} Starting${BL} $container ${CL} \n"
     pct start $container
-    echo -e "${BL}[Info]${GN} Waiting For${BL} $container${CL}${GN} To Start ${CL} \n"
+    echo -e "${BL}[Info]${GN} Waiting for${BL} $container${CL}${GN} to start ${CL} \n"
     sleep 5
     update_container $container
     echo -e "${BL}[Info]${GN} Shutting down${BL} $container ${CL} \n"
@@ -45,4 +45,4 @@ do
 
 done; wait
 
-echo -e "${GN} Finished, All Containers Updated. ${CL} \n"
+echo -e "${GN} Finished, all containers updated. ${CL} \n"
